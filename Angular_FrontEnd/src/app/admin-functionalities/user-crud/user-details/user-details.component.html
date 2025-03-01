@@ -1,0 +1,45 @@
+<div class="container mt-4">
+  <h2 class="display-5 text-start ms-4 mb-4">Here You can Manage the Users</h2>
+
+  <!-- Bootstrap Scrollable Table Wrapper -->
+  <div class="table-responsive overflow-auto" style="max-height: 400px;">
+    <table class="table table-bordered table-hover text-center align-middle">
+      <thead class="table-dark">
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Address</th>
+          <th>Role</th>
+          <th>Update</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users">
+          <td>{{ user.userId }}</td>
+          <td>{{ user.fullName }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.address }}</td>
+          <td>{{ user.role.roleName }}</td>
+          <td>
+            <button class="btn btn-warning btn-sm me-2" (click)="updateUser(user.userId)">
+              Update
+            </button>
+            </td>
+            <td>
+            <button class="btn btn-danger btn-sm" (click)="deleteUser(user.userId)">
+              Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <button class="btn btn-outline-dark mt-4 text-end me-4" [routerLink]="'/Admin'">Back To Admin Dashboard</button>
+  <hr class="mt-4">
+
+</div>
+
+

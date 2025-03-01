@@ -1,0 +1,25 @@
+<div class="alert container col-md-6 d-flex alert-secondary mt-5 justify-content-center">
+  <form [formGroup]="assignCouponForm" (ngSubmit)="onSubmit()" id="AssignCouponForm" novalidate>
+    <fieldset class="text-dark">
+      <legend>Assign Coupon to User</legend>
+
+      <!-- Coupon ID Field (Read-Only) -->
+      <div class="mb-3 mt-3">
+        <label for="couponId">Coupon ID:</label>
+        <input type="text" formControlName="couponId" class="form-control" id="couponId"/>
+      </div>
+
+      <!-- User ID Field -->
+      <div class="mb-3 mt-3">
+        <label for="userId">User ID:</label>
+        <input type="number" formControlName="userId" class="form-control" id="userId" placeholder="Enter User ID" required />
+        <span class="text-danger" *ngIf="assignCouponForm.get('userId')?.invalid && assignCouponForm.get('userId')?.touched">
+          <strong>Enter a valid User ID</strong>
+        </span>
+      </div>
+
+      <!-- Submit Button -->
+      <button type="submit" class="btn btn-primary" [disabled]="assignCouponForm.invalid">Assign Coupon</button>
+    </fieldset>
+  </form>
+</div>

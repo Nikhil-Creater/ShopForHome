@@ -1,0 +1,131 @@
+CREATE DATABASE ShopForHomeCPFDB;
+USE ShopForHomeCPFDB;
+
+DROP TABLE IF EXISTS Wishlists;
+DROP TABLE IF EXISTS UserCoupons;
+DROP TABLE IF EXISTS OrderItems;
+DROP TABLE IF EXISTS Orders;
+DROP TABLE IF EXISTS Carts;
+DROP TABLE IF EXISTS Users;
+DROP TABLE IF EXISTS Products;
+DROP TABLE IF EXISTS StockAlerts;
+DROP TABLE IF EXISTS SalesReports;
+DROP TABLE IF EXISTS Roles;
+DROP TABLE IF EXISTS DiscountCoupons;
+DROP TABLE IF EXISTS Categories;
+
+CREATE TABLE Categories (
+    CategoryId INT IDENTITY(1,1) PRIMARY KEY,
+    CategoryName NVARCHAR(255) NOT NULL,
+    CreatedAt DATETIME2 NOT NULL,
+    UpdatedAt DATETIME2 NULL
+);
+
+CREATE TABLE DiscountCoupons (
+    CouponId INT IDENTITY(1,1) PRIMARY KEY,
+    DiscountPercentage DECIMAL(5,2) NOT NULL,
+    ExpiryDate DATETIME2 NOT NULL,
+    IsActive BIT NOT NULL
+);
+
+CREATE TABLE Roles (
+    RoleId INT IDENTITY(1,1) PRIMARY KEY,
+    RoleName NVARCHAR(255) NOT NULL
+);
+
+CREATE TABLE SalesReports (
+    ReportId INT IDENTITY(1,1) PRIMARY KEY,
+    ReportPeriodStart DATETIME2 NOT NULL,
+    ReportPeriodEnd DATETIME2 NOT NULL,
+    TotalSales DECIMAL(18,2) NOT NULL,
+    GeneratedAt DATETIME2 NOT NULL
+);
+
+CREATE TABLE StockAlerts (
+    NotificationId INT IDENTITY(1,1) PRIMARY KEY,
+    Message NVARCHAR(MAX) NOT NULL,
+    CreatedAt DATETIME2 NOT NULL,
+    IsRead BIT NOT NULL
+);
+
+CREATE TABLE Products (
+    ProductId INT IDENTITY(1,1) PRIMARY KEY,
+    ProductName NVARCHAR(255) NOT NULL,
+    Description NVARCHAR(MAX) NOT NULL,
+    Price DECIMAL(18,2) NOT NULL,
+    Rating FLOAT NOT NULL,
+    StockQuantity INT NOT NULL,
+    CategoryId INT NOT NULL,
+    CategoryName NVARCHAR(255) NULL,
+    ImageUrl NVARCHAR(MAX) NOT NULL,
+    CreatedAt DATETIME2 NOT NULL,
+    CONSTRAINT FK_Products_Categories FOREIGN KEY (CategoryId) REFERENCES Categories(CategoryId) ON DELETE CASCADE
+);
+
+CREATE TABLE Users (
+    UserId INT IDENTITY(1,1) PRIMARY KEY,
+    FullName NVARCHAR(255) NOT NULL,
+    Email NVARCHAR(255) NOT NULL UNIQUE,
+    Address NVARCHAR(MAX) NOT NULL,
+    PasswordHash NVARCHAR(MAX) NULL,
+    NormalPassword NVARCHAR(MAX) NOT NULL,
+    RoleId INT NOT NULL,
+    CreatedAt DATETIME2 NOT NULL,
+    CONSTRAINT FK_Users_Roles FOREIGN KEY (RoleId) REFERENCES Roles(RoleId) ON DELETE CASCADE
+);
+
+CREATE TABLE Carts (
+    CartId INT IDENTITY(1,1) PRIMARY KEY,
+    UserId INT NOT NULL,
+    ProductId INT NOT NULL,
+    ProductQuantity INT NOT NULL,
+    Price DECIMAL(18,2) NOT NULL,
+    TotalAmount DECIMAL(18,2) NOT NULL,
+    CreatedAt DATETIME2 NOT NULL,
+    UpdatedAt DATETIME2 NULL,
+    CONSTRAINT FK_Carts_Users FOREIGN KEY (UserId) REFERENCES Users(UserId) ON DELETE CASCADE,
+    CONSTRAINT FK_Carts_Products FOREIGN KEY (ProductId) REFERENCES Products(ProductId) ON DELETE CASCADE
+);
+
+CREATE TABLE Orders (
+    OrderId INT IDENTITY(1,1) PRIMARY KEY,
+    UserId INT NOT NULL,
+    CouponId INT NULL,
+    TotalAmount DECIMAL(18,2) NOT NULL,
+    DiscountAmount DECIMAL(18,2) NULL,
+    FinalAmount DECIMAL(18,2) NOT NULL,
+    Address NVARCHAR(MAX) NULL,
+    OrderStatus NVARCHAR(255) NOT NULL,
+    CreatedAt DATETIME2 NOT NULL,
+    CONSTRAINT FK_Orders_Users FOREIGN KEY (UserId) REFERENCES Users(UserId) ON DELETE CASCADE,
+    CONSTRAINT FK_Orders_DiscountCoupons FOREIGN KEY (CouponId) REFERENCES DiscountCoupons(CouponId)
+);
+
+CREATE TABLE OrderItems (
+    OrderItemId INT IDENTITY(1,1) PRIMARY KEY,
+    OrderId INT NOT NULL,
+    ProductId INT NOT NULL,
+    Price DECIMAL(18,2) NOT NULL,
+    Quantity INT NOT NULL,
+    CONSTRAINT FK_OrderItems_Orders FOREIGN KEY (OrderId) REFERENCES Orders(OrderId) ON DELETE CASCADE,
+    CONSTRAINT FK_OrderItems_Products FOREIGN KEY (ProductId) REFERENCES Products(ProductId) ON DELETE CASCADE
+);
+
+CREATE TABLE UserCoupons (
+    UserCouponId INT IDENTITY(1,1) PRIMARY KEY,
+    UserId INT NOT NULL,
+    CouponId INT NOT NULL,
+    IsUsed BIT NOT NULL,
+    ExpiryDate DATETIME2 NULL,
+    CONSTRAINT FK_UserCoupons_Users FOREIGN KEY (UserId) REFERENCES Users(UserId) ON DELETE CASCADE,
+    CONSTRAINT FK_UserCoupons_DiscountCoupons FOREIGN KEY (CouponId) REFERENCES DiscountCoupons(CouponId) ON DELETE CASCADE
+);
+
+CREATE TABLE Wishlists (
+    WishlistId INT IDENTITY(1,1) PRIMARY KEY,
+    UserId INT NOT NULL,
+    ProductId INT NOT NULL,
+    CreatedAt DATETIME2 NULL,
+    CONSTRAINT FK_Wishlists_Users FOREIGN KEY (UserId) REFERENCES Users(UserId) ON DELETE CASCADE,
+    CONSTRAINT FK_Wishlists_Products FOREIGN KEY (ProductId) REFERENCES Products(ProductId) ON DELETE CASCADE
+);

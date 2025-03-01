@@ -1,0 +1,65 @@
+<div class="container mt-5">
+    <h1 class="display-4 text-center mb-4"><strong>Admin Dashboard</strong></h1>
+
+    <div class="row g-4">
+        <!-- User Management -->
+        <div class="col-md-4">
+            <div class="card shadow-lg">
+                <div class="card-body text-center">
+                    <i class="fas fa-users fa-3x text-primary mb-3"></i>
+                    <h5 class="card-title">Manage Users</h5>
+                    <p class="card-text">View and manage user details.</p>
+                    <button class="btn btn-primary" [routerLink]="'/admin/users'">Go to Users</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Category Management -->
+        <div class="col-md-4">
+            <div class="card shadow-lg">
+                <div class="card-body text-center">
+                    <i class="fas fa-list-alt fa-3x text-success mb-3"></i>
+                    <h5 class="card-title">Manage Categories</h5>
+                    <p class="card-text">Add, edit, or remove product categories.</p>
+                    <button class="btn btn-success" [routerLink]="'/admin/categories'">Go to Categories</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Product Management -->
+        <div class="col-md-4">
+            <div class="card shadow-lg">
+                <div class="card-body text-center">
+                    <i class="fas fa-box-open fa-3x text-warning mb-3"></i>
+                    <h5 class="card-title">Manage Products</h5>
+                    <p class="card-text">Add, update, or delete products.</p>
+                    <button class="btn btn-warning" [routerLink]="'/admin/products'">Go to Products</button>
+                </div>
+            </div>
+        </div>
+        <!-- coupons crud -->
+
+        <div class="col-md-4">
+            <div class="card shadow-lg">
+                <div class="card-body text-center">
+                    <i class="fas fa-tags fa-3x text-info mb-3"></i>
+                    <h5 class="card-title">Manage Coupons</h5>
+                    <p class="card-text">Add, update, or delete coupons.</p>
+                    <button class="btn btn-info" [routerLink]="'/Admin/coupons'">Go to coupons</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card shadow-lg">
+                <div class="card-body text-center">
+                    <i class="fas fa-file-alt fa-3x text-danger mb-3"></i>
+                    <h5 class="card-title">Manage Sales Report</h5>
+                    <p class="card-text">View, and manage the Sales Report</p>
+                    <button class="btn btn-danger" [routerLink]="'/Admin/sale-report'">Go to Sales Report</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<router-outlet></router-outlet>

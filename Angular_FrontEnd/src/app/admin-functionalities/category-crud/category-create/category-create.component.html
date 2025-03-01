@@ -1,0 +1,21 @@
+<div class="alert container col-md-6 d-flex alert-secondary mt-5 justify-content-center">
+  <form [formGroup]="myReactiveForm" (ngSubmit)="onSubmit($event)" id="CategoryForm">
+    <fieldset class="text-dark">
+      <legend>Add Category Form</legend>
+
+      <!-- Category Name Field -->
+      <div class="mb-3 mt-3">
+        <label for="categoryName">Category Name:</label>
+        <input type="text" formControlName="categoryName" class="form-control" id="categoryName"
+          placeholder="Enter category name" name="categoryName" required />
+        <span class="text-danger"
+          *ngIf="!myReactiveForm.get('categoryName')?.valid && myReactiveForm.get('categoryName')?.touched">
+          <strong>Enter a valid category name</strong>
+        </span>
+      </div>
+
+      <!-- Submit Button -->
+      <button type="submit" class="btn btn-primary" [disabled]="!myReactiveForm.valid">Submit</button>
+    </fieldset>
+  </form>
+</div>

@@ -1,0 +1,38 @@
+<div class="alert container col-md-6 d-flex alert-secondary mt-5 justify-content-center">
+  <form [formGroup]="myReactiveForm" (ngSubmit)="onSubmit($event)" id="CouponForm">
+    <fieldset class="text-dark">
+      <legend>Add Coupon Form</legend>
+
+      <!-- Discount Percentage Field -->
+      <div class="mb-3 mt-3">
+        <label for="discountPercentage">Discount Percentage:</label>
+        <input type="number" formControlName="discountPercentage" class="form-control" id="discountPercentage"
+          placeholder="Enter discount percentage" name="discountPercentage" required min="1" max="100" />
+        <span class="text-danger"
+          *ngIf="!myReactiveForm.get('discountPercentage')?.valid && myReactiveForm.get('discountPercentage')?.touched">
+          <strong>Enter a valid discount percentage (1-100)</strong>
+        </span>
+      </div>
+
+      <!-- Expiry Date Field -->
+      <div class="mb-3 mt-3">
+        <label for="expiryDate">Expiry Date:</label>
+        <input type="date" formControlName="expiryDate" class="form-control" id="expiryDate"
+          name="expiryDate" required />
+        <span class="text-danger"
+          *ngIf="!myReactiveForm.get('expiryDate')?.valid && myReactiveForm.get('expiryDate')?.touched">
+          <strong>Select a valid expiry date</strong>
+        </span>
+      </div>
+
+      <!-- Is Active Checkbox -->
+      <div class="mb-3 mt-3 form-check">
+        <input type="checkbox" formControlName="isActive" class="form-check-input" id="isActive">
+        <label class="form-check-label" for="isActive">Is Active?</label>
+      </div>
+
+      <!-- Submit Button -->
+      <button type="submit" class="btn btn-primary" [disabled]="!myReactiveForm.valid">Create Coupon</button>
+    </fieldset>
+  </form>
+</div>

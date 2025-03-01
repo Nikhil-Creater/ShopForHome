@@ -1,0 +1,70 @@
+<div class="container mt-4">
+  <!-- Accordion for Search Filters -->
+  <div class="accordion" id="searchAccordion">
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingOne">
+        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
+          aria-expanded="true" aria-controls="collapseOne">
+          Search Filters
+        </button>
+      </h2>
+      <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+        data-bs-parent="#searchAccordion">
+        <div class="accordion-body">
+          <!-- Search Form -->
+          <form [formGroup]="searchForm" (ngSubmit)="onSearch()">
+            <div class="row">
+              <!-- Min Price -->
+              <div class="col-md-6 mb-3">
+                <label for="minPrice" class="form-label">Min Price:</label>
+                <input type="number" id="minPrice" class="form-control" formControlName="minPrice"
+                  placeholder="Enter minimum price">
+              </div>
+
+              <!-- Max Price -->
+              <div class="col-md-6 mb-3">
+                <label for="maxPrice" class="form-label">Max Price:</label>
+                <input type="number" id="maxPrice" class="form-control" formControlName="maxPrice"
+                  placeholder="Enter maximum price">
+              </div>
+
+              <!-- Min Rating -->
+              <div class="col-md-6 mb-3">
+                <label for="minRating" class="form-label">Min Rating:</label>
+                <input type="number" id="minRating" class="form-control" formControlName="minRating" min="0" max="5"
+                  step="0.1" placeholder="Enter minimum rating">
+              </div>
+
+              <!-- Max Rating -->
+              <div class="col-md-6 mb-3">
+                <label for="maxRating" class="form-label">Max Rating:</label>
+                <input type="number" id="maxRating" class="form-control" formControlName="maxRating" min="0" max="5"
+                  step="0.1" placeholder="Enter maximum rating">
+              </div>
+
+              <!-- Category Name -->
+              <div class="col-md-6 mb-3">
+                <label for="categoryName" class="form-label">Category Name:</label>
+                <input type="text" id="categoryName" class="form-control" formControlName="categoryName"
+                  placeholder="Enter category name">
+              </div>
+
+              <!-- Keyword -->
+              <div class="col-md-6 mb-3">
+                <label for="keyword" class="form-label">Keyword:</label>
+                <input type="text" id="keyword" class="form-control" formControlName="keyword"
+                  placeholder="Enter keyword">
+              </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="text-center mt-3">
+              <button type="submit" class="btn btn-primary">Search</button>
+              <button type="button" class="btn btn-secondary ms-2" (click)="searchForm.reset()">Reset</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

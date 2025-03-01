@@ -1,0 +1,23 @@
+<div class="container py-4">
+  <h2 class="text-center mb-4">Product Catalog</h2>
+<app-search (searchResults)="filteredProducts = $event"></app-search>
+  <!-- Product Grid -->
+  <div class="row mt-4">
+    <div *ngFor="let product of filteredProducts" class="col-md-4 col-sm-6">
+      <div class="card product-card shadow-sm border-0 rounded">
+        <img [src]="product.imageUrl" class="card-img-top px-4" alt="{{ product.productName }}" style="width: 100%; height: auto; max-height: 200px; object-fit: contain;">
+        <div class="card-body text-center">
+          <h5 class="card-title">{{ product.productName }}</h5>
+          <p class="card-text text-muted">{{ product.description }}</p>
+          <p class="fw-bold text-success">Price: ${{ product.price }}</p>
+          <p class="text-warning">⭐ {{ product.rating }}</p>
+          <button class="btn btn-primary w-100" (click)="addToCart(product.productId)">Add to Cart</button>
+          <br>
+          <br>
+          <button class="btn btn-primary w-100" (click)="toggleWishlist(product.productId)">Add to Wishlist</button>                   
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<br><br>

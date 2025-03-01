@@ -1,0 +1,9 @@
+<div class="jumbotron text-center p-5 bg-light rounded">
+  <h1 class="display-4">Do you really want to deactivate this Coupon?</h1>
+  <p class="lead">This action cannot be undone. Please confirm before proceeding.</p>
+  <hr class="my-4">
+  <div class="d-flex justify-content-center gap-3">
+    <button class="btn btn-success btn-lg" [routerLink]="['/Admin/coupons']">Cancel</button>
+    <button class="btn btn-danger btn-lg" (click)="deactivateCoupon()">Confirm</button>
+  </div>
+</div>

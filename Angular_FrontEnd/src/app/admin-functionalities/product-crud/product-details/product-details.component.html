@@ -1,0 +1,63 @@
+<div class="container mt-4">
+  <h2 class="display-5 text-start ms-4 mb-4">Here You can Manage the Products</h2>
+
+  <!-- Bootstrap Scrollable Table Wrapper -->
+  <div class="table-responsive overflow-auto" style="max-height: 400px;">
+    <table class="table table-bordered table-hover text-center align-middle">
+      <thead class="table-dark">
+        <tr>
+          <th>SrNo</th>
+          <th>Id</th>
+          <th>Product Name</th>
+          <th>Description</th>
+          <th>Product Price</th>
+          <th>Rating</th>
+          <th>Stock</th>
+          <th>Category Name</th>
+          <th>Image Link</th>
+          <th>Created At</th>
+          <th>Update</th>
+          <th>Delete</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of products;index as i">
+          <td>{{i+1}}</td>
+          <td>{{ product.productId }}</td>
+          <td>{{ product.productName }}</td>
+          <td>{{product.description}}</td>
+          <td>{{ product.price }}</td>
+          <td>{{ product.rating }}</td>
+          <td>{{ product.stockQuantity }}</td>
+          <td>{{ product.categoryName }}</td>
+          <td>{{ product.imageUrl }}</td>
+          <td>{{ product.createdAt }}</td>
+          <td>
+            <button class="btn btn-warning btn-sm me-2" (click)="updateProduct(product.productId)">
+              Update
+            </button>
+          </td>
+          <td>
+            <button class="btn btn-danger btn-sm" (click)="deleteProduct(product.productId)">
+              Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="mb-3">
+    <label for="fileInput" class="btn btn-outline-success mt-4 me-4">
+      Upload CSV
+      <input type="file" id="fileInput" (change)="onFileSelected($event)" class="d-none" accept=".csv">
+    </label>
+    <button class="btn btn-outline-primary ms-2 mt-4 me-4" (click)="uploadCSV()"
+      [disabled]="!selectedFile">Submit</button>
+    <button class="btn btn-outline-dark mt-4 text-end me-4" (click)='addProduct()'>Add Product</button>
+    <button class="btn btn-outline-dark mt-4 text-end me-4" [routerLink]="'/Admin'">Back To Admin Dashboard</button>
+
+  </div>
+
+  <hr class="mt-4">
+</div>

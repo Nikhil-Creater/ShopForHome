@@ -1,0 +1,32 @@
+<div class="container mt-4">
+  <h2>Sales Report Details</h2>
+
+  <!-- Child Component: Fetches Sales Data -->
+  <app-sale-report-generate (salesData)="updateSalesData($event)"></app-sale-report-generate>
+
+
+  <!-- Display Sales Report Table -->
+  <table class="table mt-4">
+    <thead class="table-dark">
+      <tr>
+        <th>Report Id</th>
+        <th>Report Period Start</th>
+        <th>Report Period End</th>
+        <th>Total Sales</th>
+        <th>Generated At</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let sale of salesData">
+        <td>{{ sale.reportId }}</td>
+        <td>{{ sale.reportPeriodStart | date: 'dd/MM/yyyy' }}</td>
+        <td>{{ sale.reportPeriodEnd | date: 'dd/MM/yyyy' }}</td>
+        <td>{{ sale.totalSales | currency: 'USD' }}</td>
+        <td>{{sale.generatedAt}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <button class="btn btn-outline-dark mt-4 text-end me-4" [routerLink]="'/Admin'">Back To Admin Dashboard</button>
+
+</div>

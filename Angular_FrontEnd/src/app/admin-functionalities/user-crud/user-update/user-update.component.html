@@ -1,0 +1,61 @@
+<div class="alert container col-md-6 d-flex alert-secondary mt-5 justify-content-center">
+  <form [formGroup]="myReactiveForm" (ngSubmit)="onSubmit($event)" id="RegistrationForm" novalidate>
+    <div *ngIf="submitted">
+      <div class="alert alert-success">
+        <strong>Submitted Successfully!!</strong>
+      </div>
+    </div>
+    <fieldset class="text-dark">
+      <legend>User Registration Form</legend>
+
+      <!-- full Name Field -->
+      <div class="mb-3 mt-3">
+        <label for="fullName">fullName:</label>
+        <input type="text" formControlName="fullName" class="form-control" id="fullName" placeholder="Enter full name" name="fullName" required />
+        <span class="text-danger" *ngIf="myReactiveForm.get('fullName')?.invalid && myReactiveForm.get('fullName')?.touched">
+          <strong>Enter a valid name</strong>
+        </span>
+      </div>
+      <!-- email field -->
+      <div class="mb-3 mt-3">
+        <label for="email">email:</label>
+        <input type="text" formControlName="email" class="form-control" id="email" placeholder="Enter email" name="email" required />
+        <span class="text-danger" *ngIf="myReactiveForm.get('email')?.invalid && myReactiveForm.get('email')?.touched">
+          <strong>Enter a valid email address</strong>
+        </span>
+      </div>
+      <!-- address field -->
+      <div class="mb-3 mt-3">
+        <label for="address">Address:</label>
+        <input type="text" formControlName="address" class="form-control" id="address" placeholder="Enter address" name="address" required />
+        <span class="text-danger" *ngIf="myReactiveForm.get('address')?.invalid && myReactiveForm.get('address')?.touched">
+          <strong>address is empty or not proper</strong>
+        </span>
+      </div>
+
+      <!-- password Field -->
+      <div class="mb-3 mt-3">
+        <label for="password">Password:</label>
+        <input type="password" formControlName="normalPassword" class="form-control" id="normalPassword" placeholder="Enter password" name="normalPassword" required />
+        <span class="text-danger" *ngIf="myReactiveForm.get('normalPassword')?.invalid && myReactiveForm.get('normalPassword')?.touched">
+          <strong>Enter a valid password</strong>
+        </span>
+      </div>
+
+<!-- Role Field -->
+<div class="mb-3 mt-3">
+  <label for="role">Role:</label>
+  <select formControlName="roleId" class="form-control" id="role" name="roleId" required>
+    <option value="1">Admin</option>
+    <option value="2">User</option>
+  </select>
+  <span class="text-danger" *ngIf="myReactiveForm.get('roleId')?.invalid && myReactiveForm.get('roleId')?.touched">
+    <strong>Please select a role</strong>
+  </span>
+</div>
+
+      <!-- Submit Button -->
+      <button type="submit" class="btn btn-primary" [disabled]="myReactiveForm.invalid">Submit</button>
+    </fieldset>
+  </form>
+</div>

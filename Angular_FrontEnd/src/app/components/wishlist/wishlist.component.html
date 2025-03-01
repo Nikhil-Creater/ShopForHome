@@ -1,0 +1,38 @@
+<div class="container mt-4">
+  <h2 class="text-center mb-4">My Wishlist ❤️</h2>
+
+  <!-- Debug Wishlist Length -->
+  <p class="text-muted text-center">Total Items: {{ wishlist.length }}</p>
+
+  <!-- Clear Wishlist Button -->
+  <div class="d-flex justify-content-end mb-3" *ngIf="wishlist.length > 0">
+    <button class="btn btn-danger d-flex align-items-center" (click)="clearWishlist()">
+      <i class="fas fa-trash-alt me-2"></i> Clear Wishlist
+    </button>
+  </div>
+
+  <!-- Wishlist Items Grid -->
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4" *ngIf="wishlist.length > 0">
+    <div class="col" *ngFor="let item of wishlist">
+      <div class="card h-100 shadow-sm">
+        <img [src]="item.product.imageUrl" class="card-img-top" [alt]="item.product.productName" />
+        <div class="card-body text-center">
+          <h5 class="card-title">{{ item.product.productName }}</h5>
+          <p class="card-text text-primary fw-bold">${{ item.product.price }}</p>
+          <p class="card-text text-muted">{{ item.product.categoryName }}</p>
+        </div>
+        <div class="card-footer text-center">
+          <button class="btn btn-outline-danger btn-sm d-flex align-items-center mx-auto"
+            (click)="removeFromWishlist(item.wishlistId)">
+            <i class="fas fa-times me-2"></i> Remove
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Empty Wishlist Message -->
+  <div *ngIf="wishlist.length === 0" class="text-center mt-4">
+    <p class="text-muted mt-3">Your wishlist is empty. Start adding your favorite items! 💖</p>
+  </div>
+</div>

@@ -1,0 +1,71 @@
+<div class="container mt-5" style="max-width: 900px; margin: auto; background: #fff; padding: 20px; border-radius: 10px; box-shadow: 0px 4px 10px rgba(0,0,0,0.1);">
+  <h2 class="text-center mb-4" style="font-weight: 600; color: #333;">🛒 Your Shopping Cart</h2>
+
+  <!-- Custom Loading Indicator -->
+  <div *ngIf="loading" class="text-center">
+    <div class="loader" style="border: 4px solid #f3f3f3; border-top: 4px solid #3498db; border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin: auto;"></div>
+    <p style="font-weight: 500; color: #555; margin-top: 10px;">Loading your cart...</p>
+  </div>
+
+  <!-- Cart Table -->
+  <div *ngIf="!loading && cartItems.length > 0">
+    <table class="table table-hover">
+      <thead style="background: #343a40; color: white;">
+        <tr>
+          <th>Product</th>
+          <th style="text-align: center;">Quantity</th>
+          <th>Price</th>
+          <th>Total</th>
+          <th style="text-align: center;">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of cartItems">
+          <td style="font-weight: 500;">{{ item.ProductName }}</td>
+          <td style="text-align: center;">
+            <button (click)="decreaseQuantity(item.CartId)" class="btn btn-sm btn-outline-danger" style="border-radius: 50%; width: 30px; height: 30px; padding: 2px;">
+              <i class="fas fa-minus"></i>
+            </button>
+            <span class="mx-2" style="font-weight: 500; font-size: 16px;">{{ item.ProductQuantity }}</span>
+            <button (click)="increaseQuantity(item.CartId)" class="btn btn-sm btn-outline-success" style="border-radius: 50%; width: 30px; height: 30px; padding: 2px;">
+              <i class="fas fa-plus"></i>
+            </button>
+          </td>
+          <td style="font-weight: 500; color: #28a745;">${{ item.Price }}</td>
+          <td style="font-weight: 600; color: #333;">${{ item.TotalAmount }}</td>
+          <td style="text-align: center;">
+            <button (click)="removeFromCart(item.CartId)" class="btn btn-sm btn-danger" style="border-radius: 5px;">
+              <i class="fas fa-trash-alt"></i> Remove
+            </button>
+          </td>
+        </tr>       
+      </tbody>
+    </table>
+
+    <!-- Clear Cart Button -->
+    <div class="text-center mt-4">
+      <button (click)="clearCart()" class="btn btn-danger" style="font-weight: 600; padding: 10px 20px;">
+        <i class="fas fa-trash"></i> Clear Cart
+      </button>
+    </div>
+    <div class="text-center mt-4">
+      <button class="btn btn-success" style="font-weight: 600; padding: 10px 20px;" (click)="proceedToCheckout()">
+        💰 Proceed To Checkout
+      </button>
+    </div>    
+  </div>
+
+  <!-- Empty Cart Message -->
+  <div *ngIf="!loading && cartItems.length === 0" class="text-center" style="padding: 20px; border: 1px dashed #aaa; border-radius: 8px; background: #f8f9fa;">
+    <h4 style="font-weight: 600; color: #555;">🛍️ Your cart is empty!</h4>
+    <p style="color: #777;">Start adding items to your cart.</p>
+  </div>
+</div>
+
+<!-- Inline CSS for Loader Animation -->
+<style>
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+</style>

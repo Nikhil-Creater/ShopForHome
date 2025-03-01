@@ -1,0 +1,68 @@
+/* Navbar Enhancements */
+.navbar {
+    background: linear-gradient(135deg, #007bff, #6610f2); /* Gradient effect */
+    padding: 5px 10px;
+}
+
+.navbar-brand img {
+    height: 25px; /* Slightly bigger logo */
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.nav-link {
+    font-weight: 300;
+    text-transform: uppercase;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.nav-link:hover {
+    opacity: 0.8;
+}
+
+.btn.bootstrap-icons {
+    font-weight: bold;
+    background: white;
+    border-radius: 20px;
+    padding: 6px 15px;
+    margin-right: 8px;
+    transition: 0.3s;
+}
+
+.btn.bootstrap-icons:hover {
+    background: rgba(255, 255, 255, 0.9);
+}
+
+.navbar-toggler {
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.navbar-toggler-icon {
+    filter: invert(1); /* White color icon */
+}
+
+/* Badge Styling */
+.badge {
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+footer {
+    background: linear-gradient(135deg, #343a40, #212529); /* Dark gradient */
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
+}
+
+footer p {
+    margin-bottom: 5px;
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+footer a {
+    color: #17a2b8; /* Light blue for links */
+    transition: color 0.3s ease-in-out;
+}
+
+footer a:hover {
+    color: #f8f9fa; /* Soft white hover effect */
+}

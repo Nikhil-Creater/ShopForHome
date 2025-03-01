@@ -1,0 +1,58 @@
+<div class="alert container col-md-6 d-flex alert-secondary mt-5 justify-content-center">
+  <form [formGroup]="myReactiveForm" (ngSubmit)="onSubmit($event)" id="RegistrationForm" novalidate>
+    <div *ngIf="submitted">
+      <div class="alert alert-success">
+        <strong>Submitted Successfully!!</strong>
+      </div>
+    </div>
+    <fieldset class="text-dark">
+      <legend>Product Update Form</legend>
+
+      <!-- full Name Field -->
+      <div class="mb-3 mt-3">
+        <label for="productName">productName:</label>
+        <input type="text" formControlName="productName" class="form-control" id="productName" placeholder="Enter product name" name="productName" required />
+        <span class="text-danger" *ngIf="myReactiveForm.get('productName')?.invalid && myReactiveForm.get('productName')?.touched">
+          <strong>Enter a valid product name</strong>
+        </span>
+      </div>
+      <!-- price field -->
+      <div class="mb-3 mt-3">
+        <label for="description">description:</label>
+        <input type="text" formControlName="description" class="form-control" id="description" placeholder="Enter description" name="description" required />
+        <span class="text-danger" *ngIf="myReactiveForm.get('description')?.invalid && myReactiveForm.get('description')?.touched">
+          <strong>Enter a valid price</strong>
+        </span>
+      </div>
+      <div class="mb-3 mt-3">
+        <label for="price">price:</label>
+        <input type="number" formControlName="price" class="form-control" id="price" placeholder="Enter price" name="price" required />
+        <span class="text-danger" *ngIf="myReactiveForm.get('price')?.invalid && myReactiveForm.get('price')?.touched">
+          <strong>Enter a valid price</strong>
+        </span>
+      </div>
+
+      <!-- stockQuantity field -->
+      <div class="mb-3 mt-3">
+        <label for="stockQuantity">stockQuantity:</label>
+        <input type="number" formControlName="stockQuantity" class="form-control" id="stockQuantity" placeholder="Enter stockQuantity" name="stockQuantity" required />
+        <span class="text-danger" *ngIf="myReactiveForm.get('stockQuantity')?.invalid && myReactiveForm.get('stockQuantity')?.touched">
+          <strong>stockQuantity is empty or not proper</strong>
+        </span>
+      </div>
+
+
+      <div class="mb-3 mt-3">
+        <label for="imageUrl">imageUrl:</label>
+        <input type="url" formControlName="imageUrl" class="form-control" id="imageUrl" placeholder="Enter img url" name="imageUrl" required />
+        <span class="text-danger" *ngIf="myReactiveForm.get('imageUrl')?.invalid && myReactiveForm.get('imageUrl')?.touched">
+          <strong>Enter a valid password</strong>
+        </span>
+      </div>
+
+
+      <!-- Submit Button -->
+      <button type="submit" class="btn btn-primary" [disabled]="myReactiveForm.invalid">Submit</button>
+    </fieldset>
+  </form>
+</div>

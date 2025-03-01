@@ -1,0 +1,51 @@
+<div class="container mt-4">
+  <h2 class="display-5 text-start ms-4 mb-4">Here You can Manage the Coupons</h2>
+
+  <!-- Bootstrap Scrollable Table Wrapper -->
+  <div class="table-responsive overflow-auto" style="max-height: 400px;">
+    <table class="table table-bordered table-hover text-center align-middle">
+      <thead class="table-dark">
+        <tr>
+          <th>SrNo</th>
+          <th>coupon Id</th>
+          <th>Discount Percent</th>
+          <th>Expiry Date</th>
+          <th>Is Active</th>
+          <th>Assign</th>
+          <th>Deactivate</th>
+          <th>Delete</th>
+
+
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let coupon of coupons;index as i">
+          <td>{{i+1}}</td>
+          <td>{{ coupon.couponId}}</td>
+          <td>{{ coupon.discountPercentage}} %</td>
+          <td>{{ coupon.expiryDate | date:'fullDate' }}</td>
+          <td>{{ coupon.isActive }}</td>
+          <td>
+            <button class="btn btn-warning btn-sm me-2" (click)="assignCoupon(coupon.couponId)">
+              assign
+            </button>
+            </td>
+            <td>
+            <button class="btn btn-danger btn-sm" (click)="deactivateCoupon(coupon.couponId)">
+              deactivate
+            </button>
+          </td>
+            <td>
+            <button class="btn btn-danger btn-sm" (click)="deleteCoupon(coupon.couponId)">
+              delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <button class="btn btn-outline-dark mt-4 text-end me-4" (click) = 'createCoupon()'>Add Coupon</button>
+  <button class="btn btn-outline-dark mt-4 text-end me-4" [routerLink]="'/Admin'">Back To Admin Dashboard</button>
+  <hr class="mt-4">
+</div>
